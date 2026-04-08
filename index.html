@@ -67,7 +67,14 @@
             color: #ffffff;
         }
         
-        .contact-btn {
+        /* Botones de Contacto */
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-email {
             background-color: white;
             color: black;
             padding: 10px 20px;
@@ -76,7 +83,18 @@
             font-weight: 500;
             transition: background-color 0.3s;
         }
-        .contact-btn:hover { background-color: #e0e0e0; }
+        .btn-email:hover { background-color: #e0e0e0; }
+
+        .btn-whatsapp {
+            background-color: #25d366; /* Verde oficial de WhatsApp */
+            color: black; /* Texto negro para máximo contraste */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        .btn-whatsapp:hover { opacity: 0.85; }
 
         /* Hero */
         .hero {
@@ -189,12 +207,19 @@
             font-size: 0.9rem;
         }
 
+        .footer-contact {
+            margin-top: 15px;
+            color: white;
+            font-weight: 500;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .hero { padding: 60px 20px; }
-            nav { padding: 20px; }
+            nav { padding: 15px 20px; flex-wrap: wrap; gap: 15px; justify-content: center; }
             .nav-links { display: none; }
+            .nav-actions { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -209,7 +234,10 @@
             <a href="#casos-uso">Casos de Uso</a>
             <a href="#por-que-jadem">Por qué JADEM</a>
         </div>
-        <a href="mailto:contacto@jademco.net" class="contact-btn">Hablar con Ventas</a>
+        <div class="nav-actions">
+            <a href="mailto:contacto@jademco.net" class="btn-email">Correo</a>
+            <a href="https://wa.me/51999999999?text=Hola,%20me%20interesa%20hablar%20con%20ventas%20sobre%20las%20soluciones%20de%20JADEM." target="_blank" class="btn-whatsapp">WhatsApp</a>
+        </div>
     </nav>
 
     <header class="hero">
@@ -278,7 +306,7 @@
 
     <footer>
         <p>JADEM CORPORATION © 2026. Data Engine para Sudamérica.</p>
-        <p>contacto@jademco.net</p>
+        <p class="footer-contact">Email: contacto@jademco.net &nbsp;|&nbsp; WhatsApp: +51 999 999 999</p>
     </footer>
 
     <script>
