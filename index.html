@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JADEM | Data Engine para la IA en Sudamérica</title>
     <style>
-        /* Estilos base limpios y modernos, inspirados en Scale AI */
         :root {
             --bg-dark: #0a0a0a;
             --text-light: #f5f5f7;
@@ -21,15 +20,27 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Navegación */
+        /* Lienzo de fondo para la animación de datos */
+        #data-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Lo mantiene al fondo */
+            opacity: 0.7;
+        }
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: transparent;
         }
 
         .logo { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
@@ -45,7 +56,6 @@
         }
         .contact-btn:hover { background-color: #e0e0e0; }
 
-        /* Hero Section (Sección Principal) */
         .hero {
             padding: 120px 40px;
             max-width: 900px;
@@ -69,7 +79,6 @@
             margin-right: auto;
         }
 
-        /* Servicios / Soluciones */
         .solutions {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -80,11 +89,18 @@
         }
 
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background-color: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(10px); /* Efecto cristal para que se vea la animación detrás */
+            border: 1px solid rgba(255,255,255,0.1);
             padding: 30px;
             border-radius: 8px;
             text-align: left;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.3);
         }
 
         .card h3 {
@@ -95,16 +111,14 @@
 
         .card p { color: #a1a1aa; font-size: 1rem; }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 40px;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(255,255,255,0.05);
             color: #a1a1aa;
             font-size: 0.9rem;
         }
 
-        /* Ajustes para móviles */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .hero { padding: 60px 20px; }
@@ -113,6 +127,8 @@
     </style>
 </head>
 <body>
+
+    <canvas id="data-canvas"></canvas>
 
     <nav>
         <div class="logo">JADEM</div>
@@ -144,5 +160,80 @@
         <p>contacto@jademco.net</p>
     </footer>
 
+    <script>
+        const canvas = document.getElementById('data-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; // Velocidad X lenta
+                this.vy = (Math.random() - 0.5) * 0.5; // Velocidad Y lenta
+                this.radius = Math.random() * 1.5 + 0.5;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Rebotar en los bordes
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.fill();
+            }
+        }
+
+        // Crear partículas (Nodos de datos)
+        for (let i = 0; i < 80; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Conectar partículas cercanas (Líneas de red)
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        // Mientras más cerca, más opaca es la línea
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - distance/600})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
 </body>
 </html>
