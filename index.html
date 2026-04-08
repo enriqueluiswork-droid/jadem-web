@@ -3,68 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JADEM CORPORATION | Soluciones Tecnológicas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>JADEM | Data Engine para la IA en Sudamérica</title>
+    <style>
+        /* Estilos base limpios y modernos, inspirados en Scale AI */
+        :root {
+            --bg-dark: #0a0a0a;
+            --text-light: #f5f5f7;
+            --accent-blue: #2563eb;
+            --card-bg: #111111;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Navegación */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+        
+        .contact-btn {
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .contact-btn:hover { background-color: #e0e0e0; }
+
+        /* Hero Section (Sección Principal) */
+        .hero {
+            padding: 120px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #a1a1aa;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Servicios / Soluciones */
+        .solutions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 0 40px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .card h3 {
+            color: white;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .card p { color: #a1a1aa; font-size: 1rem; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: #a1a1aa;
+            font-size: 0.9rem;
+        }
+
+        /* Ajustes para móviles */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .hero { padding: 60px 20px; }
+            nav { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">JADEM CORPORATION</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
-        </div>
+    <nav>
+        <div class="logo">JADEM</div>
+        <a href="mailto:contacto@jademco.net" class="contact-btn">Hablar con Ventas</a>
     </nav>
 
-    <header class="bg-primary text-white text-center py-5">
-        <div class="container py-5">
-            <h1 class="display-4 fw-bold">Impulsamos tu Infraestructura Tecnológica</h1>
-            <p class="lead mb-4">Desarrollo de software, análisis de datos y soluciones Cloud B2B.</p>
-            <a href="#contacto" class="btn btn-light btn-lg text-primary fw-bold">Contáctanos</a>
-        </div>
+    <header class="hero">
+        <h1>Impulsa tu IA con datos de alta calidad.</h1>
+        <p>Aceleramos el desarrollo de la Inteligencia Artificial en Sudamérica. Entrenamos modelos fundamentales y proporcionamos anotación de datos a gran escala (RLHF, LLMs) para los equipos de ML más ambiciosos.</p>
     </header>
 
-    <section id="servicios" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Nuestros Servicios</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-primary">Infraestructura IT</h5>
-                            <p class="card-text">Diseño, despliegue y mantenimiento de servidores y redes corporativas robustas.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-primary">Desarrollo Web</h5>
-                            <p class="card-text">Creación de plataformas, automatizaciones y scripts a medida.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-primary">Análisis de Datos</h5>
-                            <p class="card-text">Extracción, procesamiento y visualización de datos para la toma de decisiones.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="solutions">
+        <div class="card">
+            <h3>Generative AI & LLMs</h3>
+            <p>Datos de alta calidad para Reinforcement Learning from Human Feedback (RLHF). Respuestas precisas para entrenar la próxima generación de modelos de lenguaje en español.</p>
+        </div>
+        <div class="card">
+            <h3>Computer Vision</h3>
+            <p>Anotación masiva y precisa de imágenes y videos (Bounding boxes, segmentación semántica) para entrenar sistemas de percepción en robótica, agricultura y retail.</p>
+        </div>
+        <div class="card">
+            <h3>Data Analytics</h3>
+            <p>Estructuramos lo inestructurado. Procesamiento y análisis de datos a gran escala, transformando información cruda en insights accionables para la toma de decisiones.</p>
         </div>
     </section>
 
-    <footer id="contacto" class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <p class="mb-0">© 2026 JADEM CORPORATION. Todos los derechos reservados.</p>
-            <p class="small mt-2">Contacto: <a href="mailto:contacto@jademco.net" class="text-white text-decoration-none">contacto@jademco.net</a></p>
-        </div>
+    <footer>
+        <p>JADEM CORPORATION © 2026. Data Engine para Sudamérica.</p>
+        <p>contacto@jademco.net</p>
     </footer>
 
 </body>
