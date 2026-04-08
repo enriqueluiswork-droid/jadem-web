@@ -23,15 +23,15 @@
             overflow-x: hidden;
         }
 
-        /* Lienzo de fondo para la animación de datos */
+        /* Lienzo de fondo para la animación de datos - ALTO CONTRASTE */
         #data-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1; /* Lo mantiene al fondo */
-            opacity: 0.7;
+            z-index: -1;
+            opacity: 1.0; /* Aumentado de 0.7 a 1.0 para brillo máximo */
         }
 
         nav {
@@ -68,6 +68,8 @@
             line-height: 1.1;
             margin-bottom: 20px;
             font-weight: 600;
+            /* Agregado una ligera sombra para mayor legibilidad sobre el fondo brillante */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero p {
@@ -77,6 +79,7 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .solutions {
@@ -89,8 +92,9 @@
         }
 
         .card {
-            background-color: rgba(17, 17, 17, 0.8);
-            backdrop-filter: blur(10px); /* Efecto cristal para que se vea la animación detrás */
+            /* Tarjetas ligeramente más opacas para contrastar mejor con el fondo brillante */
+            background-color: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.1);
             padding: 30px;
             border-radius: 8px;
@@ -179,16 +183,16 @@
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5; // Velocidad X lenta
-                this.vy = (Math.random() - 0.5) * 0.5; // Velocidad Y lenta
-                this.radius = Math.random() * 1.5 + 0.5;
+                this.vx = (Math.random() - 0.5) * 0.4; // Velocidad X ligeramente más lenta para mayor suavidad
+                this.vy = (Math.random() - 0.5) * 0.4; // Velocidad Y ligeramente más lenta
+                // AUMENTADO: Puntos más grandes y notorios
+                this.radius = Math.random() * 2.0 + 1.0; 
             }
 
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Rebotar en los bordes
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
             }
@@ -196,12 +200,13 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                // AUMENTADO: Puntos casi 100% blancos y brillantes
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'; 
                 ctx.fill();
             }
         }
 
-        // Crear partículas (Nodos de datos)
+        // Número de partículas (datos)
         for (let i = 0; i < 80; i++) {
             particles.push(new Particle());
         }
@@ -213,7 +218,6 @@
                 particles[i].update();
                 particles[i].draw();
 
-                // Conectar partículas cercanas (Líneas de red)
                 for (let j = i; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
@@ -223,9 +227,13 @@
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        // Mientras más cerca, más opaca es la línea
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - distance/600})`;
-                        ctx.lineWidth = 0.5;
+                        
+                        // AUMENTADO DRAMÁTICAMENTE: Líneas de conexión mucho más intensas
+                        // Fórmula ajustada para mayor opacidad base
+                        const lineOpacity = 0.5 - distance/300; 
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${lineOpacity})`;
+                        
+                        ctx.lineWidth = 0.6; // Línea ligeramente más gruesa
                         ctx.stroke();
                     }
                 }
